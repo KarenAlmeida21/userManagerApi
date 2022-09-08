@@ -36,6 +36,7 @@ public class UserServiceTest {
         Mockito.doNothing().when(userRepository).deleteById(Mockito.anyLong());
         userRepository.deleteById(user.getId());
     }
+
     @Test
     public void testeDeletarUserNegativo(){
         Mockito.doNothing().when(userRepository).deleteById(Mockito.anyLong());
@@ -44,5 +45,12 @@ public class UserServiceTest {
                 () -> {userService.deletarUser(Long.valueOf(0));});
 
         Assertions.assertEquals("Login Inexistente", exception.getMessage());
+    }
+    @Test
+    public void testeSalvarPositivo(){
+        Mockito.when(userRepository.existsById(Mockito.anyLong())).thenReturn(true);
+        userRepository.save(user);
+        Mockito.verify(userRepository, Mockito.times(1)).save(user);
+
     }
 }
