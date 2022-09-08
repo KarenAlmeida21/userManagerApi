@@ -1,5 +1,6 @@
 package com.api.userManagerApi.controller;
 
+import com.api.userManagerApi.Dtos.UserSaidaDto;
 import com.api.userManagerApi.models.User;
 import com.api.userManagerApi.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -21,10 +22,17 @@ public class UserController {
         Object user = userService.salvarUser(userEntradaDto);
         return modelMapper.map(user, User.class);
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarUser(@PathVariable Long id) {
         userService.deletarUser(id);
+    }
+
+    @GetMapping("id/{id}")
+    public UserSaidaDto exibirPorId(@PathVariable Long id) {
+        User user = userService.exibirPorId(id);
+        return modelMapper.map(user, UserSaidaDto.class);
     }
 
 
