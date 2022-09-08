@@ -4,6 +4,7 @@ package com.api.userManagerApi.services;
 import com.api.userManagerApi.exceptions.UserInexistente;
 import com.api.userManagerApi.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.api.userManagerApi.repositories.UserRepository;
 
@@ -13,10 +14,15 @@ import java.util.Optional;
 public class UserService {
 @Autowired
     UserRepository userRepository;
+@Autowired
+private BCryptPasswordEncoder encoder;
 
     public User salvarUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+
     public void deletarUser(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
