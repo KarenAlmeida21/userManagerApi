@@ -8,10 +8,16 @@ import com.api.userManagerApi.models.User;
 import com.api.userManagerApi.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest({UserServiceTest.class, UserController.class, Conversor.class})
 public class UserControllerTest {
@@ -42,5 +48,13 @@ public class UserControllerTest {
         userSaidaDto.setLogin("karen");
 
         objectMapper = new ObjectMapper();
+    }
+
+    @Test
+    public void testarDeleteUser()throws Exception{
+        user.setId(Long.valueOf(1));
+        Mockito.doNothing().when(userService).deletarUser(Mockito.anyLong());
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/user/"
+                + user.getId()).contentType(MediaType.APPLICATION_JSON)) .andExpect(MockMvcResultMatchers.status().is(204));
     }
 }
