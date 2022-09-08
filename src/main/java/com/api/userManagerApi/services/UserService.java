@@ -1,15 +1,16 @@
-package services;
 
-import exceptions.UserInexistente;
-import models.User;
+package com.api.userManagerApi.services;
+
+import com.api.userManagerApi.exceptions.UserInexistente;
+import com.api.userManagerApi.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.UserRepository;
+import com.api.userManagerApi.repositories.UserRepository;
 
 import java.util.Optional;
 
 @Service
-public class userService {
+public class UserService {
 @Autowired
     UserRepository userRepository;
 

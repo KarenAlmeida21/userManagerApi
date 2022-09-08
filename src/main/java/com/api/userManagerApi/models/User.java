@@ -1,4 +1,4 @@
-package models;
+package com.api.userManagerApi.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

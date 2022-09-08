@@ -1,7 +1,7 @@
-package repositories;
+package com.api.userManagerApi.repositories;
 
 
-import models.User;
+import com.api.userManagerApi.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
