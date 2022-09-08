@@ -24,4 +24,13 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+    public User exibirPorId(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserInexistente("Usuario não encontrado");
+        }
+        User userGet = user.get();
+        return userGet;
+    }
+
 }
