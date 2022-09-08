@@ -1,12 +1,12 @@
 package com.api.userManagerApi.Dtos;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-@Getter
-@Size
 
+@Getter
+@Setter
 public class UserEntradaDto {
     @NotBlank
     private Long id;
