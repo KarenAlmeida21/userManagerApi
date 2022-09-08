@@ -7,6 +7,7 @@ import com.api.userManagerApi.controller.UserController;
 import com.api.userManagerApi.exceptions.UserInexistente;
 import com.api.userManagerApi.models.User;
 import com.api.userManagerApi.services.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,8 @@ public class UserControllerTest {
         user.setId(Long.valueOf(1));
         Mockito.doNothing().when(userService).deletarUser(Mockito.anyLong());
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/user/"
-                + user.getId()).contentType(MediaType.APPLICATION_JSON)) .andExpect(MockMvcResultMatchers.status().is(204));
+                + user.getId()).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(204));
     }
 
     @Test
@@ -67,4 +69,5 @@ public class UserControllerTest {
                         user.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(422));
     }
+
 }
