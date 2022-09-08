@@ -21,6 +21,12 @@ public class UserController {
         Object user = userService.salvarUser(userEntradaDto);
         return modelMapper.map(user, User.class);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarUser(@PathVariable Long id) {
+        userService.deletarUser(id);
+    }
+
 
 
 }
