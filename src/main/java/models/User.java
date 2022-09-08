@@ -3,7 +3,6 @@ package models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Controller;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
-@NoArgsConstructor
+
 
 @Entity
 @Table(name = "user")
@@ -23,4 +22,10 @@ public class User {
     private String login;
     @Column(nullable = false)
     private String password;
+
+    public User(Long id, String login, String password) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+    }
 }
