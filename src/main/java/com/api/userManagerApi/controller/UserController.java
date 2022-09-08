@@ -1,5 +1,6 @@
 package com.api.userManagerApi.controller;
 
+import com.api.userManagerApi.Dtos.UserEntradaDto;
 import com.api.userManagerApi.Dtos.UserSaidaDto;
 import com.api.userManagerApi.models.User;
 import com.api.userManagerApi.services.UserService;
@@ -7,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -18,8 +21,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User salvarUser(@RequestBody User userEntradaDto) {
-        Object user = userService.salvarUser(userEntradaDto);
+    public User salvarUser(@RequestBody User userEntrada) {
+        Object user = userService.salvarUser(userEntrada);
         return modelMapper.map(user, User.class);
     }
 
@@ -39,6 +42,13 @@ public class UserController {
     public UserSaidaDto exibirPorLogin(@PathVariable String login) {
         User user = userService.exibirPorLogin(login);
         return modelMapper.map(user, UserSaidaDto.class);
+    }
+
+//Erro:identifier of an instance of com.api.userManagerApi.models.User was altered from 2 to 20
+    @PutMapping("/{id}")
+    public UserEntradaDto atualizarUser(@PathVariable Long id, @RequestBody User userEntradaDto) {
+        User user = userService.atualizarUser(id, userEntradaDto);
+        return modelMapper.map(user, UserEntradaDto.class);
     }
 
 

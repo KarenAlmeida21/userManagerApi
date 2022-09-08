@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
+@NoArgsConstructor
+
 
 
 @Entity
@@ -29,6 +31,5 @@ public class User {
         this.password = password;
     }
 
-    public User() {
-    }
+
 }

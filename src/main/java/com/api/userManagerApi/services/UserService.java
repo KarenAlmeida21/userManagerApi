@@ -14,7 +14,7 @@ public class UserService {
 @Autowired
     UserRepository userRepository;
 
-    public Object salvarUser(User user) {
+    public User salvarUser(User user) {
         return userRepository.save(user);
     }
     public void deletarUser(Long id) {
@@ -24,6 +24,8 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+
     public User exibirPorId(Long id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty()) {
@@ -33,6 +35,7 @@ public class UserService {
         return userGet;
     }
 
+
     public User exibirPorLogin(String login){
         for(User user : userRepository.findAll()){
             if (user.getLogin().equals(login)) {
@@ -41,5 +44,22 @@ public class UserService {
             }
         }
         throw new UserInexistente("Login não encontrado");
+    }
+
+
+    public User atualizarUser(Long id, User userEntradaDto) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserInexistente("Não encontrado");
+        } else {
+            User userAtualiza = user.get();
+            userAtualiza.setId(userEntradaDto.getId());
+            userAtualiza.setLogin(userEntradaDto.getLogin());
+            userAtualiza.setPassword(userEntradaDto.getPassword());
+            userRepository.save(userAtualiza);
+            return userAtualiza;
+        }
+
+
     }
 }

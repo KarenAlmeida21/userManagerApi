@@ -1,4 +1,4 @@
-package com.api.userManagerApi;
+package com.api.userManagerApi.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
