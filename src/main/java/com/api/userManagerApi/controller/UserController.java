@@ -35,6 +35,12 @@ public class UserController {
         return modelMapper.map(user, UserSaidaDto.class);
     }
 
+    @GetMapping("login/{login}")
+    public UserSaidaDto exibirPorLogin(@PathVariable String login) {
+        User user = userService.exibirPorLogin(login);
+        return modelMapper.map(user, UserSaidaDto.class);
+    }
+
 
 
 }

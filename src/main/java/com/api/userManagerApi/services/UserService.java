@@ -33,4 +33,13 @@ public class UserService {
         return userGet;
     }
 
+    public User exibirPorLogin(String login){
+        for(User user : userRepository.findAll()){
+            if (user.getLogin().equals(login)) {
+
+                return user;
+            }
+        }
+        throw new UserInexistente("Login não encontrado");
+    }
 }
