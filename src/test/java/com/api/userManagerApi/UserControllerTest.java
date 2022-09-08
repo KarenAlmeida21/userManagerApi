@@ -4,6 +4,7 @@ import com.api.userManagerApi.Dtos.UserEntradaDto;
 import com.api.userManagerApi.Dtos.UserSaidaDto;
 import com.api.userManagerApi.componentes.Conversor;
 import com.api.userManagerApi.controller.UserController;
+import com.api.userManagerApi.exceptions.UserInexistente;
 import com.api.userManagerApi.models.User;
 import com.api.userManagerApi.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,5 +57,14 @@ public class UserControllerTest {
         Mockito.doNothing().when(userService).deletarUser(Mockito.anyLong());
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/user/"
                 + user.getId()).contentType(MediaType.APPLICATION_JSON)) .andExpect(MockMvcResultMatchers.status().is(204));
+    }
+
+    @Test
+    public void testeDeleteUserNegativo() throws Exception {
+        Mockito.doThrow(UserInexistente.class).when(userService).deletarUser(Mockito.anyLong());
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/user/" +
+                        user.getId()).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(422));
     }
 }
