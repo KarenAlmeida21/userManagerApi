@@ -16,6 +16,12 @@ public class UserLogado implements UserDetails {
     public UserLogado() {
     }
 
+    public UserLogado(Long id, String login, String password) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
