@@ -1,10 +1,10 @@
 package com.api.userManagerApi.Dtos;
 
-public class LoginDto {
+public class UserLoginDto {
     private String login;
     private String password;
 
-    public LoginDto() {
+    public UserLoginDto() {
     }
 
     public String getLogin() {
