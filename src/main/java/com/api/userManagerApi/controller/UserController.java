@@ -18,12 +18,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public User salvarUser(@RequestBody User userEntrada) {
-        Object user = userService.salvarUser(userEntrada);
-        return modelMapper.map(user, User.class);
-    }
+
+@PostMapping
+@ResponseStatus(HttpStatus.CREATED)
+public void cadastrarUser(@RequestBody UserEntradaDto userEntradaDto){
+    User userNew = modelMapper.map(userEntradaDto, User.class);
+    modelMapper.map(userService.salvarUser(userNew),UserEntradaDto.class);
+}
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
