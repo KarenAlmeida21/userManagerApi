@@ -1,6 +1,7 @@
 package com.api.userManagerApi.exceptions;
 
 public class MensagemErro {
+
     private String mensagem;
     public MensagemErro(String mensagem) {
         this.mensagem= mensagem;

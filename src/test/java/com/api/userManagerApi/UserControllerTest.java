@@ -35,7 +35,7 @@ public class UserControllerTest {
 
     @BeforeEach
     public void user(){
-        user=new User();
+        user= new User();
         user.setId(1L);
         user.setLogin("karen");
         user.setPassword("karen1");

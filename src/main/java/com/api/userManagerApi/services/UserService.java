@@ -1,6 +1,7 @@
 
 package com.api.userManagerApi.services;
 
+import com.api.userManagerApi.Dtos.UserEntradaDto;
 import com.api.userManagerApi.exceptions.UserExistente;
 import com.api.userManagerApi.exceptions.UserInexistente;
 import com.api.userManagerApi.models.User;
@@ -28,7 +29,7 @@ public class UserService {
     public void deletarUser(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
-            throw new UserInexistente("Login Inexistente");
+            throw new UserInexistente("Id não encontrado");
         }
         userRepository.deleteById(id);
     }
@@ -55,19 +56,19 @@ public class UserService {
     }
 
 
-    public User atualizarUser(Long id, User userEntradaDto) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            throw new UserInexistente("Não encontrado");
-        } else {
-            User userAtualiza = user.get();
-            userAtualiza.setId(userEntradaDto.getId());
-            userAtualiza.setLogin(userEntradaDto.getLogin());
-            userAtualiza.setPassword(userEntradaDto.getPassword());
-            userRepository.save(userAtualiza);
-            return userAtualiza;
-        }
 
+    public User busca(String login){
+        Optional<User> userOptional = userRepository.findByLogin(login);
+        return userOptional.get();
+    }
 
+    public User atualizarUser(String login, UserEntradaDto userNew){
+        User user = busca(login);
+        user.setPassword(userNew.getPassword());
+        user.setLogin(userNew.getLogin());
+        //user.setId(userNew.getId());
+
+        userRepository.save(user);
+        return user;
     }
 }

@@ -1,6 +1,7 @@
 package com.api.userManagerApi.controller;
 
 import com.api.userManagerApi.Dtos.UserEntradaDto;
+import com.api.userManagerApi.Dtos.UserFilterDto;
 import com.api.userManagerApi.Dtos.UserSaidaDto;
 import com.api.userManagerApi.models.User;
 import com.api.userManagerApi.services.UserService;
@@ -45,11 +46,11 @@ public void cadastrarUser(@RequestBody UserEntradaDto userEntradaDto){
         return modelMapper.map(user, UserSaidaDto.class);
     }
 
-//Erro:identifier of an instance of com.api.userManagerApi.models.User was altered from 2 to 20
-    @PutMapping("/{id}")
-    public UserEntradaDto atualizarUser(@PathVariable Long id, @RequestBody User userEntradaDto) {
-        User user = userService.atualizarUser(id, userEntradaDto);
-        return modelMapper.map(user, UserEntradaDto.class);
+    @PutMapping("/{login}")
+    public UserFilterDto atualizarUser(@PathVariable String login,
+                                       @RequestBody UserEntradaDto userEntradaDto) {
+        User user = userService.atualizarUser(login, userEntradaDto);
+        return modelMapper.map(user, UserFilterDto.class);
     }
 
 
