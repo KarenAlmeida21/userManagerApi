@@ -1,6 +1,7 @@
 package com.api.userManagerApi.config;
 
 import com.api.userManagerApi.exceptions.MensagemErro;
+import com.api.userManagerApi.exceptions.UserExistente;
 import com.api.userManagerApi.exceptions.UserInexistente;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+import static org.springframework.http.HttpStatus.*;
 
 @RestControllerAdvice
 public class ControllerAdvice {
@@ -35,6 +36,14 @@ public class ControllerAdvice {
     public MensagemErro userNaoEncontrado(UserInexistente exception){
         return new MensagemErro((exception.getMessage()));
     }
+
+
+    @ExceptionHandler(UserExistente.class)
+    @ResponseStatus(INTERNAL_SERVER_ERROR)
+    public MensagemErro userJaCadastrado(UserExistente exception){
+        return new MensagemErro((exception.getMessage()));
+    }
+
 
 
 
