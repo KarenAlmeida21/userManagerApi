@@ -56,17 +56,10 @@ public class UserService {
     }
 
 
-
-    public User busca(String login){
-        Optional<User> userOptional = userRepository.findByLogin(login);
-        return userOptional.get();
-    }
-
     public User atualizarUser(String login, UserEntradaDto userNew){
-        User user = busca(login);
+        User user = exibirPorLogin(login);
         user.setPassword(userNew.getPassword());
         user.setLogin(userNew.getLogin());
-        //user.setId(userNew.getId());
 
         userRepository.save(user);
         return user;
