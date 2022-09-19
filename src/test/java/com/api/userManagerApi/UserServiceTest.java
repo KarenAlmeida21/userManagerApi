@@ -19,7 +19,6 @@ public class UserServiceTest {
     private UserRepository userRepository;
     private User user;
 
-
     @Autowired
     private UserService userService;
 
@@ -30,6 +29,7 @@ public class UserServiceTest {
         user.setLogin("karen");
         user.setPassword("karen");;
     }
+
     @Test
     public void testeDeletarUserPositivo(){
         Mockito.when(userRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(user));
@@ -46,6 +46,7 @@ public class UserServiceTest {
 
         Assertions.assertEquals("Login Inexistente", exception.getMessage());
     }
+
     @Test
     public void testeSalvarPositivo(){
         Mockito.when(userRepository.existsById(Mockito.anyLong())).thenReturn(true);
@@ -53,4 +54,5 @@ public class UserServiceTest {
         Mockito.verify(userRepository, Mockito.times(1)).save(user);
 
     }
+
 }

@@ -41,7 +41,7 @@ public class UserControllerTest {
         user.setPassword("karen1");
 
         userEntradaDto = new UserEntradaDto();
-        userEntradaDto.setId(1L);
+      //  userEntradaDto.setId(1L);
         userEntradaDto.setLogin("karen");
         userEntradaDto.setPassword("karen1");
 

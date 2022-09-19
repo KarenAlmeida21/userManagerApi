@@ -2,6 +2,7 @@
 package com.api.userManagerApi.services;
 
 import com.api.userManagerApi.Dtos.UserEntradaDto;
+import com.api.userManagerApi.Dtos.UserFilterDto;
 import com.api.userManagerApi.exceptions.UserExistente;
 import com.api.userManagerApi.exceptions.UserInexistente;
 import com.api.userManagerApi.models.User;
@@ -17,12 +18,12 @@ public class UserService {
     UserRepository userRepository;
 
     public User salvarUser(User user) {
-        if(userRepository.existsById(user.getId())){
+       if(userRepository.existsById(user.getId())){
             throw new UserExistente("Usuario já cadastrado");
-        }else {
+       }else {
             userRepository.save(user);
             return user;
-        }
+       }
     }
 
 
