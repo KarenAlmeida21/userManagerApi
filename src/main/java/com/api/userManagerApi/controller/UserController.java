@@ -52,6 +52,7 @@ public class UserController {
         return modelMapper.map(user, UserSaidaDto.class);
     }
 
+    @Cacheable(value = "exibirUsers")
     @GetMapping("exibirUserList")
     public List<UserSaidaDto> exibirUserList(){
         List<UserSaidaDto> userList = new ArrayList<>();
