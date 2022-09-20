@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -50,12 +52,24 @@ public class UserController {
         return modelMapper.map(user, UserSaidaDto.class);
     }
 
+    @GetMapping("exibirUserList")
+    public List<UserSaidaDto> exibirUserList(){
+        List<UserSaidaDto> userList = new ArrayList<>();
+      for(User userReferencia: userService.exibirUsers()){
+          UserSaidaDto userSaidaDto = modelMapper.map(userReferencia,UserSaidaDto.class);
+          userList.add(userSaidaDto);
+      }
+      return userList;
+    }
+
+
     @PatchMapping("/{login}")
     public UserFilterDto atualizarUser(@PathVariable String login,
                                        @RequestBody UserEntradaDto userEntradaDto) {
         User user = userService.atualizarUser(login, userEntradaDto);
         return modelMapper.map(user, UserFilterDto.class);
     }
+
 
 
 }

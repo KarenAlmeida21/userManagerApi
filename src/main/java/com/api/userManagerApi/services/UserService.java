@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.api.userManagerApi.repositories.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,6 +44,14 @@ public class UserService {
         }
         User userGet = user.get();
         return userGet;
+    }
+
+    public List<User> exibirUsers(){
+        List<User>userList = (List<User>) userRepository.findAll();
+        if(userList.isEmpty()){
+            throw new UserInexistente("Não há usuarios cadastrados");
+        }
+        return userList;
     }
 
 
