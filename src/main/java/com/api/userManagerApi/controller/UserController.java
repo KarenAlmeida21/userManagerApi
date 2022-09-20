@@ -36,6 +36,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CacheEvict(value ="exibirUsers", allEntries = true)
     public void deletarUser(@PathVariable Long id) {
         userService.deletarUser(id);
     }
@@ -67,6 +68,7 @@ public class UserController {
 
 
     @PatchMapping("/{login}")
+    @CacheEvict(value ="exibirUsers", allEntries = true)
     public UserFilterDto atualizarUser(@PathVariable String login,
                                        @RequestBody UserEntradaDto userEntradaDto) {
         User user = userService.atualizarUser(login, userEntradaDto);
