@@ -7,6 +7,7 @@ import com.api.userManagerApi.models.User;
 import com.api.userManagerApi.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CacheEvict(value ="exibirUsers", allEntries = true)
     public void cadastrarUser(@RequestBody @Valid UserEntradaDto userEntradaDto) {
         User userNew = modelMapper.map(userEntradaDto, User.class);
         modelMapper.map(userService.salvarUser(userNew), UserEntradaDto.class);
@@ -54,13 +56,13 @@ public class UserController {
 
     @Cacheable(value = "exibirUsers")
     @GetMapping("exibirUserList")
-    public List<UserSaidaDto> exibirUserList(){
+    public List<UserSaidaDto> exibirUserList() {
         List<UserSaidaDto> userList = new ArrayList<>();
-      for(User userReferencia: userService.exibirUsers()){
-          UserSaidaDto userSaidaDto = modelMapper.map(userReferencia,UserSaidaDto.class);
-          userList.add(userSaidaDto);
-      }
-      return userList;
+        for (User userReferencia : userService.exibirUsers()) {
+            UserSaidaDto userSaidaDto = modelMapper.map(userReferencia, UserSaidaDto.class);
+            userList.add(userSaidaDto);
+        }
+        return userList;
     }
 
 
@@ -70,7 +72,6 @@ public class UserController {
         User user = userService.atualizarUser(login, userEntradaDto);
         return modelMapper.map(user, UserFilterDto.class);
     }
-
 
 
 }
