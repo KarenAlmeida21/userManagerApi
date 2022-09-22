@@ -1,7 +1,7 @@
-package com.api.userManagerApi.config;
+package com.api.userManagerApi.config.services;
 
 import com.api.userManagerApi.models.User;
-import com.api.userManagerApi.models.UserLogin;
+import com.api.userManagerApi.models.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +24,7 @@ public class TokenService {
 
 //gerar token
     public String gerarToken(Authentication authentication) {
-        UserLogin logado = (UserLogin) authentication.getPrincipal();
+        User logado = (User) authentication.getPrincipal();
         Date hoje = new Date();
         Date dateExpiration = new Date(hoje.getTime() + Long.parseLong(experation));
 

@@ -1,5 +1,6 @@
 package com.api.userManagerApi.config;
 
+import com.api.userManagerApi.config.services.AutenticacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
+
     private static final String[] ENDPOINT_POST_PUBLICO = {
             "/user",
             "/auth"

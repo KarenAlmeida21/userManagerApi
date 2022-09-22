@@ -1,4 +1,4 @@
-package com.api.userManagerApi.config;
+package com.api.userManagerApi.Dtos;
 
 import lombok.Getter;
 

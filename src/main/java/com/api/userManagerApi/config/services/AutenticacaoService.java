@@ -1,8 +1,7 @@
-package com.api.userManagerApi.config;
+package com.api.userManagerApi.config.services;
 
-import com.api.userManagerApi.exceptions.UserInexistente;
+
 import com.api.userManagerApi.models.User;
-import com.api.userManagerApi.models.UserLogin;
 import com.api.userManagerApi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,16 +15,17 @@ import java.util.Optional;
 public class AutenticacaoService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+  private   UserRepository userRepository;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserLogin> user = userRepository.findByLogin(username);
+        Optional<User> user = userRepository.findByLogin(username);
         if (user.isPresent()) {
+
             return user.get();
         }
-        throw new UserInexistente("Dados inválidos");
+        throw new UsernameNotFoundException("Dados inválidos");
 
     }
 }
