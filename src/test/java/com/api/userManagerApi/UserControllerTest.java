@@ -34,14 +34,14 @@ public class UserControllerTest {
     private UserSaidaDto userSaidaDto;
 
     @BeforeEach
-    public void user(){
-        user= new User();
+    public void user() {
+        user = new User();
         user.setId(1L);
         user.setLogin("karen");
         user.setPassword("karen1");
 
         userEntradaDto = new UserEntradaDto();
-      //  userEntradaDto.setId(1L);
+        userEntradaDto.setId(1L);
         userEntradaDto.setLogin("karen");
         userEntradaDto.setPassword("karen1");
 
@@ -53,11 +53,11 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testarDeleteUser()throws Exception{
+    public void testarDeleteUser() throws Exception {
         user.setId(Long.valueOf(1));
         Mockito.doNothing().when(userService).deletarUser(Mockito.anyLong());
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/user/"
-                + user.getId()).contentType(MediaType.APPLICATION_JSON))
+                        + user.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(204));
     }
 

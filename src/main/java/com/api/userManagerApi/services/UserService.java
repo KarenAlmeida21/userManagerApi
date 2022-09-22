@@ -19,13 +19,13 @@ public class UserService {
     UserRepository userRepository;
 
     public User salvarUser(User user) {
-       if(userRepository.existsById(user.getId())){
-            throw new UserExistente("Usuario já cadastrado");
-       }else {
+      // if(userRepository.existsById(user.getId())){
+           // throw new UserExistente("Usuario já cadastrado");
+    //   }else {
             userRepository.save(user);
             return user;
        }
-    }
+  //  }
 
 
     public void deletarUser(Long id) {

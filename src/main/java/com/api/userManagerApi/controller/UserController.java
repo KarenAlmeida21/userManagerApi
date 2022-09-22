@@ -3,6 +3,7 @@ package com.api.userManagerApi.controller;
 import com.api.userManagerApi.Dtos.UserEntradaDto;
 import com.api.userManagerApi.Dtos.UserFilterDto;
 import com.api.userManagerApi.Dtos.UserSaidaDto;
+import com.api.userManagerApi.Dtos.UserSave;
 import com.api.userManagerApi.models.User;
 import com.api.userManagerApi.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -29,9 +30,9 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @CacheEvict(value ="exibirUsers", allEntries = true)
-    public void cadastrarUser(@RequestBody @Valid UserEntradaDto userEntradaDto) {
+    public void cadastrarUser(@RequestBody @Valid UserSave userEntradaDto) {
         User userNew = modelMapper.map(userEntradaDto, User.class);
-        modelMapper.map(userService.salvarUser(userNew), UserEntradaDto.class);
+        modelMapper.map(userService.salvarUser(userNew), UserSave.class);
     }
 
     @DeleteMapping("/{id}")
